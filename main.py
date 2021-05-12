@@ -1,11 +1,11 @@
 import pygame
 
 pygame.init()
-win = pygame.display.set_mode((500, 500))
+win = pygame.display.set_mode((520, 520))
 pygame.display.set_caption("Jakob`s Adventures in Dungeon")
 
-x = 50
-y = 50
+x = 10
+y = 10
 width = 50
 height = 50
 speed = 50
@@ -19,13 +19,13 @@ while run:
             run = False
 
     keys = pygame.key.get_pressed()
-    if keys[pygame.K_LEFT]:
+    if keys[pygame.K_LEFT] and x > 10:
         x -= speed
-    if keys[pygame.K_RIGHT]:
+    if keys[pygame.K_RIGHT] and x < 500 - width:
         x += speed
-    if keys[pygame.K_UP]:
+    if keys[pygame.K_UP] and y > 10:
         y -= speed
-    if keys[pygame.K_DOWN]:
+    if keys[pygame.K_DOWN] and y < 500 - height:
         y += speed
 
     win.fill((0, 0, 0))
