@@ -1,5 +1,4 @@
-
-import pygame 
+import pygame
 import sys
 from os import path
 from settings import *
@@ -10,7 +9,7 @@ from Box import *
 class Game:
     def __init__(self):
         pygame.init()
-        self.screen = pygame.display.set_mode((WIDTH, HEIGHT))
+        self.screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
         pygame.display.set_caption(TITLE)
         self.clock = pygame.time.Clock()
         pygame.key.set_repeat(500, 100)
@@ -49,10 +48,10 @@ class Game:
         self.all_sprites.update()
 
     def create_dungeon(self):
-        for x in range(0, WIDTH, TEXTURES_SIZE):
-            pygame.draw.line(self.screen, SAND_COLOR, (x, 0), (x, HEIGHT))
-        for y in range(0, HEIGHT, TEXTURES_SIZE):
-            pygame.draw.line(self.screen, SAND_COLOR, (0, y), (WIDTH, y))
+        for x in range(0, SCREEN_WIDTH, TEXTURES_SIZE):
+            pygame.draw.line(self.screen, SAND_COLOR, (x, 0), (x, SCREEN_HEIGHT))
+        for y in range(0, SCREEN_HEIGHT, TEXTURES_SIZE):
+            pygame.draw.line(self.screen, SAND_COLOR, (0, y), (SCREEN_WIDTH, y))
 
     def draw(self):
         self.screen.fill(SAND_COLOR)

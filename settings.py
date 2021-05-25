@@ -1,4 +1,3 @@
-
 TITLE = "Jakob`s Adventures in Dungeon"
 
 SCREEN_WIDTH = 750
@@ -7,10 +6,9 @@ SCREEN_HEIGHT = 750
 WHITE = (255, 255, 255)
 BLACK = (0, 0, 0)
 RED = (255, 0, 0)
-YELLOW = (255, 255, 0)
+YELLOW = (240, 150, 40)
 SAND_COLOR = YELLOW
 
 TEXTURES_SIZE = 50
 SPEED = 50
-
 FPS = 60

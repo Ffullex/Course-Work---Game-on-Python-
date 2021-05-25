@@ -13,7 +13,7 @@ class Player(pygame.sprite.Sprite):
         self.x = x
         self.y = y
 
-    def move(self, dx=0, dy=0):
+    def move(self, dx=0, dy=00):
         if not self.collide_with_walls(dx, dy):
             self.x += dx
             self.y += dy
