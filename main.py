@@ -1,9 +1,10 @@
-import pygame
 import sys
 from os import path
-from settings import *
+
+from Aqua import Aqua
 from Player import *
 from Box import *
+from Camera import *
 
 
 class Game:
@@ -17,20 +18,20 @@ class Game:
 
     def set_data(self):
         pg_directory = path.dirname(__file__)
-        self.map_data = []
-        with open(path.join(pg_directory, 'map.txt'), 'rt') as f:
-            for line in f:
-                self.map_data.append(line)
+        self.map = Map(path.join(pg_directory, 'map.txt'))
 
     def new(self):
         self.all_sprites = pygame.sprite.Group()
         self.box = pygame.sprite.Group()
-        for row, tiles in enumerate(self.map_data):
+        for row, tiles in enumerate(self.map.data):
             for col, tile in enumerate(tiles):
                 if tile == '1':
                     Box(self, col, row)
+                if tile == '2':
+                    Aqua(self, col, row)
                 if tile == '$':
                     self.player = Player(self, col, row)
+        self.camera = Camera(self.map.width, self.map.height)
 
     def run(self):
         self.playing = True
@@ -46,6 +47,7 @@ class Game:
 
     def update(self):
         self.all_sprites.update()
+        self.camera.update(self.player)
 
     def create_dungeon(self):
         for x in range(0, SCREEN_WIDTH, TEXTURES_SIZE):
@@ -56,7 +58,8 @@ class Game:
     def draw(self):
         self.screen.fill(SAND_COLOR)
         self.create_dungeon()
-        self.all_sprites.draw(self.screen)
+        for sprite in self.all_sprites:
+            self.screen.blit(sprite.image, self.camera.apply(sprite))
         pygame.display.flip()
 
     def events(self):
@@ -74,6 +77,7 @@ class Game:
                     self.player.move(dy=-1)
                 if event.key == pygame.K_DOWN:
                     self.player.move(dy=1)
+
 
 g = Game()
 while True:

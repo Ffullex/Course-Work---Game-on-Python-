@@ -8,12 +8,13 @@ class Player(pygame.sprite.Sprite):
         pygame.sprite.Sprite.__init__(self, self.groups)
         self.game = game
         self.image = pygame.Surface((TEXTURES_SIZE, TEXTURES_SIZE))
-        self.image.fill(WHITE)
+        self.image = pygame.image.load("Jacob.png").convert_alpha()
+        self.image = pygame.transform.scale(self.image, (100, 100))
         self.rect = self.image.get_rect()
         self.x = x
         self.y = y
 
-    def move(self, dx=0, dy=00):
+    def move(self, dx=0, dy=0):
         if not self.collide_with_walls(dx, dy):
             self.x += dx
             self.y += dy
