@@ -5,7 +5,7 @@ from Aqua import Aqua
 from Player import *
 from Box import *
 from Camera import *
-
+from Portal import *
 
 class Game:
     def __init__(self):
@@ -31,6 +31,8 @@ class Game:
                     Aqua(self, col, row)
                 if tile == '$':
                     self.player = Player(self, col, row)
+                if tile == 'E':
+                    Portal(self, col, row)
         self.camera = Camera(self.map.width, self.map.height)
 
     def run(self):
