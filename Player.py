@@ -1,4 +1,7 @@
-import pygame 
+import sys
+import pygame
+import pygame.sprite
+
 from settings import *
 
 
@@ -18,10 +21,20 @@ class Player(pygame.sprite.Sprite):
         if not self.collide_with_walls(dx, dy):
             self.x += dx
             self.y += dy
+        if self.collide_with_portal(dx, dy):
+            pygame.quit()
+            sys.exit()
 
     def collide_with_walls(self, dx=0, dy=0):
         for box in self.game.box:
             if box.x == self.x + dx and box.y == self.y + dy:
+                return True
+        return False
+
+    def collide_with_portal(self, dx=0, dy=0):
+        for box in self.game.portal:
+            if box.x == self.x + dx and box.y == self.y + dy:
+                print('la la la')
                 return True
         return False
 

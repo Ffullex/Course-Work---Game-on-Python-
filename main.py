@@ -1,7 +1,9 @@
 import sys
 from os import path
 
-from Aqua import Aqua
+import pygame.sprite
+
+from Aqua import *
 from Player import *
 from Box import *
 from Camera import *
@@ -18,31 +20,35 @@ class Game:
         self.set_data()
 
     def set_data(self):
-        pg_directory = path.dirname(__file__)
-        self.map = Map(path.join(pg_directory, 'map.txt'))
+        pygame_directory = path.dirname(__file__)
+        self.map = Map(path.join(pygame_directory, 'map.txt'))
 
     def new(self):
         self.all_sprites = pygame.sprite.Group()
         self.box = pygame.sprite.Group()
-        for row, tiles in enumerate(self.map.data):
-            for col, tile in enumerate(tiles):
-                if tile == '1':
+        self.portal = pygame.sprite.Group()
+        for row, boxes in enumerate(self.map.data):
+            for col, box in enumerate(boxes):
+                if box == '1':
                     Box(self, col, row)
-                if tile == '2':
+                if box == '2':
                     Aqua(self, col, row)
-                if tile == '$':
+                if box == '$':
                     self.player = Player(self, col, row)
-                if tile == 'E':
+                if box == 'E':
                     Portal(self, col, row)
         self.camera = Camera(self.map.width, self.map.height)
 
     def run(self):
-        self.playing = True
-        while self.playing:
+        gameplay = True
+        while gameplay:
             self.dt = self.clock.tick(FPS) / 1000
             self.events()
             self.update()
             self.draw()
+            if not Player.collide_with_portal:
+                print("no no no")
+                g.quit()
 
     def quit(self):
         pygame.quit()

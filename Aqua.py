@@ -4,6 +4,7 @@ from settings import *
 
 class Aqua(pygame.sprite.Sprite):
     def __init__(self, game, x, y):
+        # пока что логика как у box, поэтому в группе box
         self.groups = game.all_sprites, game.box
         pygame.sprite.Sprite.__init__(self, self.groups)
         self.game = game

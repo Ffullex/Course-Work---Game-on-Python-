@@ -4,7 +4,7 @@ from settings import *
 
 class Portal(pygame.sprite.Sprite):
     def __init__(self, game, x, y):
-        self.groups = game.all_sprites, game.box
+        self.groups = game.all_sprites, game.portal
         pygame.sprite.Sprite.__init__(self, self.groups)
         self.game = game
         self.image = pygame.Surface((TEXTURES_SIZE, TEXTURES_SIZE))
