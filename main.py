@@ -1,6 +1,4 @@
-import sys
 from os import path
-
 import pygame.sprite
 
 from Aqua import *

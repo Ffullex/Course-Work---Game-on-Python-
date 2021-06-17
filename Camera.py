@@ -8,10 +8,10 @@ class Map:
         with open(filename, 'rt') as f:
             for line in f:
                 self.data.append(line)
-        self.boxwidth = len(self.data[0])
-        self.boxheight = len(self.data)
-        self.width = self.boxwidth + TEXTURES_SIZE
-        self.height = self.boxheight + TEXTURES_SIZE
+        self.boxWidth = len(self.data[0])
+        self.boxHeight = len(self.data)
+        self.width = self.boxWidth + TEXTURES_SIZE
+        self.height = self.boxHeight + TEXTURES_SIZE
 
 
 class Camera:
