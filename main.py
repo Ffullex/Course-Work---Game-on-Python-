@@ -7,6 +7,7 @@ from Box import *
 from Camera import *
 from Portal import *
 
+
 class Game:
     def __init__(self):
         pygame.init()
