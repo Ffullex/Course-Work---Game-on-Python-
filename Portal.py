@@ -8,8 +8,8 @@ class Portal(pygame.sprite.Sprite):
         pygame.sprite.Sprite.__init__(self, self.groups)
         self.game = game
         self.image = pygame.Surface((TEXTURES_SIZE, TEXTURES_SIZE))
-        self.image = pygame.image.load("Portal.png").convert_alpha()
-        self.image = pygame.transform.scale(self.image, (100, 100))
+        self.image = pygame.image.load("data/Portal.png").convert_alpha()
+        self.image = pygame.transform.scale(self.image, (60, 60))
         self.rect = self.image.get_rect()
         self.x = x
         self.y = y

@@ -19,7 +19,7 @@ class Game:
 
     def set_data(self):
         pygame_directory = path.dirname(__file__)
-        self.map = Map(path.join(pygame_directory, 'map.txt'))
+        self.map = Map(path.join(pygame_directory, 'maps/map.txt'))
 
     def new(self):
         self.all_sprites = pygame.sprite.Group()

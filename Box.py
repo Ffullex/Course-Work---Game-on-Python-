@@ -8,8 +8,8 @@ class Box(pygame.sprite.Sprite):
         pygame.sprite.Sprite.__init__(self, self.groups)
         self.game = game
         self.image = pygame.Surface((TEXTURES_SIZE, TEXTURES_SIZE))
-        self.image = pygame.image.load("box.png").convert_alpha()
-        self.image = pygame.transform.scale(self.image, (100, 100))
+        self.image = pygame.image.load("data/Box.png").convert_alpha()
+        self.image = pygame.transform.scale(self.image, (50, 50))
         self.rect = self.image.get_rect()
         self.x = x
         self.y = y
