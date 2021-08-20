@@ -1,7 +1,7 @@
 import pygame
 from settings import *
 
-
+# Класс Вода - внешние стены, персонаж не может по ним и через них двигаться
 class Aqua(pygame.sprite.Sprite):
     def __init__(self, game, x, y):
         # пока что логика как у box, поэтому в группе box

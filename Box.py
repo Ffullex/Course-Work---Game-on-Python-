@@ -2,6 +2,7 @@ import pygame
 from settings import *
 
 
+# Класс коробок... Пока, скорее всего, это будут несдвигаемые стены.
 class Box(pygame.sprite.Sprite):
     def __init__(self, game, x, y):
         self.groups = game.all_sprites, game.box

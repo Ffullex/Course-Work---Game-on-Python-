@@ -14,6 +14,7 @@ class Map:
         self.height = self.boxHeight + TEXTURES_SIZE
 
 
+# Класс камеры даёт прямоугольник с персонажем в центре, на котором держится фокус
 class Camera:
     def __init__(self, width, height):
         self.camera = pygame.Rect(0, 0, width, height)

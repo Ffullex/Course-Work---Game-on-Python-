@@ -7,18 +7,20 @@ from Camera import Map
 from settings import *
 
 
+# Класс персонажа
 class Player(pygame.sprite.Sprite):
     def __init__(self, game, x, y):
         self.groups = game.all_sprites
         pygame.sprite.Sprite.__init__(self, self.groups)
         self.game = game
         self.image = pygame.Surface((TEXTURES_SIZE, TEXTURES_SIZE))
-        self.image = pygame.image.load("data/Jacob.png").convert_alpha()
+        self.image = pygame.image.load("data/Jacob2.png").convert_alpha()
         self.image = pygame.transform.scale(self.image, (50, 50))
         self.rect = self.image.get_rect()
         self.x = x
         self.y = y
 
+# Метод - передвижение
     def move(self, dx=0, dy=0):
         if not self.collide_with_walls(dx, dy):
             self.x += dx
@@ -27,12 +29,14 @@ class Player(pygame.sprite.Sprite):
             self.x += dx
             self.y += dy
 
+# Метод - столкновение со стенами/коробками
     def collide_with_walls(self, dx=0, dy=0):
         for box in self.game.box:
             if box.x == self.x + dx and box.y == self.y + dy:
                 return True
         return False
 
+# Метод - столкновение с порталом
     def collide_with_portal(self, dx=0, dy=0):
         for box in self.game.portal:
             if box.x == self.x + dx and box.y == self.y + dy:

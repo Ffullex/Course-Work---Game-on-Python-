@@ -8,6 +8,7 @@ from Camera import *
 from Portal import *
 
 
+# Класс непосредственно игрового процесса
 class Game:
     def __init__(self):
         pygame.init()
@@ -17,10 +18,12 @@ class Game:
         pygame.key.set_repeat(500, 100)
         self.set_data()
 
+# Метод - получение карты
     def set_data(self):
         pygame_directory = path.dirname(__file__)
         self.map = Map(path.join(pygame_directory, 'map/map.txt'))
 
+# Метод - рисования карты
     def new(self):
         self.all_sprites = pygame.sprite.Group()
         self.box = pygame.sprite.Group()
@@ -48,20 +51,24 @@ class Game:
                 print("no no no")
                 g.quit()
 
+# Метод - выход из игры
     def quit(self):
         pygame.quit()
         sys.exit()
 
+# Метод - обновление спрайтов
     def update(self):
         self.all_sprites.update()
         self.camera.update(self.player)
 
+# Метод - создание подземелья
     def create_dungeon(self):
         for x in range(0, SCREEN_WIDTH, TEXTURES_SIZE):
             pygame.draw.line(self.screen, SAND_COLOR, (x, 0), (x, SCREEN_HEIGHT))
         for y in range(0, SCREEN_HEIGHT, TEXTURES_SIZE):
             pygame.draw.line(self.screen, SAND_COLOR, (0, y), (SCREEN_WIDTH, y))
 
+# Метод - отрисовка
     def draw(self):
         self.screen.fill(SAND_COLOR)
         self.create_dungeon()
@@ -69,6 +76,7 @@ class Game:
             self.screen.blit(sprite.image, self.camera.apply(sprite))
         pygame.display.flip()
 
+# Метод - события
     def events(self):
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
@@ -86,6 +94,7 @@ class Game:
                     self.player.move(dy=1)
 
 
+# Запуск игрового процесса
 g = Game()
 while True:
     g.new()
