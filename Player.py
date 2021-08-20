@@ -34,7 +34,6 @@ class Player(pygame.sprite.Sprite):
         elif not self.collide_with_boxes(dx, dy):
             self.x += dx
             self.y += dy
-
         elif self.collide_with_portal(dx, dy):
             self.x += dx
             self.y += dy
