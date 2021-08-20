@@ -29,6 +29,22 @@ class Player(pygame.sprite.Sprite):
             self.x += dx
             self.y += dy
 
+# Метод - столкновение с водой
+    def collide_with_aqua(self, dx=0, dy=0):
+        for aqua in self.game.aqua:
+            if aqua.x == self.x + dx and aqua.y == self.y + dy:
+                self.x = self.x - dx
+                self.y = self.y - dy
+                return True
+        return False
+
+# Метод - столкновение со стенами
+    def collide_with_walls(self, dx=0, dy=0):
+        for wall in self.game.wall:
+            if wall.x == self.x + dx and wall.y == self.y + dy:
+                return True
+        return False
+
 # Метод - столкновение с коробками
     def collide_with_boxes(self, dx=0, dy=0):
         for box in self.game.box:
@@ -36,36 +52,21 @@ class Player(pygame.sprite.Sprite):
                 return True
         return False
 
-# Метод - столкновение со стенами
-    def collide_with_walls(self, dx=0, dy=0):
-        for box in self.game.wall:
-            if box.x == self.x + dx and box.y == self.y + dy:
-                return True
-        return False
-
-# Метод - столкновение с водой
-    def collide_with_aqua(self, dx=0, dy=0):
-        for box in self.game.aqua:
-            if box.x == self.x + dx and box.y == self.y + dy:
-                return True
-        return False
-
 # Метод - столкновение с порталом
     def collide_with_portal(self, dx=0, dy=0):
-        for box in self.game.portal:
-            if box.x == self.x + dx and box.y == self.y + dy:
+        for portal in self.game.portal:
+            if portal.x == self.x + dx and portal.y == self.y + dy:
                 print('la la la')
                 return True
         return False
 
 # Метод - столкновение с пометкой
     def collide_with_mark(self, dx=0, dy=0):
-        for box in self.game.mark:
-            if box.x == self.x + dx and box.y == self.y + dy:
+        for mark in self.game.mark:
+            if mark.x == self.x + dx and mark.y == self.y + dy:
                 print('la la la')
                 return True
         return False
-
 
     def update(self):
         self.rect.x = self.x * TEXTURES_SIZE
