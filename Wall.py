@@ -6,7 +6,7 @@ from settings import *
 class Wall(pygame.sprite.Sprite):
     def __init__(self, game, x, y):
         # пока что логика как у box, поэтому в группе box
-        self.groups = game.all_sprites, game.box
+        self.groups = game.all_sprites, game.wall
         pygame.sprite.Sprite.__init__(self, self.groups)
         self.game = game
         self.image = pygame.Surface((TEXTURES_SIZE, TEXTURES_SIZE))
