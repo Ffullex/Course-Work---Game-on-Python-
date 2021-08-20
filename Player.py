@@ -29,9 +29,23 @@ class Player(pygame.sprite.Sprite):
             self.x += dx
             self.y += dy
 
-# Метод - столкновение со стенами/коробками
-    def collide_with_walls(self, dx=0, dy=0):
+# Метод - столкновение с коробками
+    def collide_with_boxes(self, dx=0, dy=0):
         for box in self.game.box:
+            if box.x == self.x + dx and box.y == self.y + dy:
+                return True
+        return False
+
+# Метод - столкновение со стенами
+    def collide_with_walls(self, dx=0, dy=0):
+        for box in self.game.wall:
+            if box.x == self.x + dx and box.y == self.y + dy:
+                return True
+        return False
+
+# Метод - столкновение с водой
+    def collide_with_aqua(self, dx=0, dy=0):
+        for box in self.game.aqua:
             if box.x == self.x + dx and box.y == self.y + dy:
                 return True
         return False
@@ -43,6 +57,15 @@ class Player(pygame.sprite.Sprite):
                 print('la la la')
                 return True
         return False
+
+# Метод - столкновение с пометкой
+    def collide_with_mark(self, dx=0, dy=0):
+        for box in self.game.mark:
+            if box.x == self.x + dx and box.y == self.y + dy:
+                print('la la la')
+                return True
+        return False
+
 
     def update(self):
         self.rect.x = self.x * TEXTURES_SIZE

@@ -2,6 +2,7 @@ from os import path
 import pygame.sprite
 
 from Aqua import *
+from Mark import Mark
 from Player import *
 from Box import *
 from Camera import *
@@ -9,6 +10,9 @@ from Portal import *
 
 
 # Класс непосредственно игрового процесса
+from Wall import Wall
+
+
 class Game:
     def __init__(self):
         pygame.init()
@@ -28,6 +32,9 @@ class Game:
         self.all_sprites = pygame.sprite.Group()
         self.box = pygame.sprite.Group()
         self.portal = pygame.sprite.Group()
+        self.wall = pygame.sprite.Group()
+        self.mark = pygame.sprite.Group()
+        self.aqua = pygame.sprite.Group()
         for row, boxes in enumerate(self.map.data):
             for col, box in enumerate(boxes):
                 if box == '1':
@@ -36,8 +43,13 @@ class Game:
                     Aqua(self, col, row)
                 if box == '$':
                     self.player = Player(self, col, row)
-                if box == 'E':
+                if box == '3':
                     Portal(self, col, row)
+                if box == '4':
+                    Wall(self, col, row)
+                if box == '5':
+                    Mark(self, col, row)
+
         self.camera = Camera(self.map.width, self.map.height)
 
     def run(self):
