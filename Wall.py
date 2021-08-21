@@ -2,7 +2,7 @@ import pygame
 from settings import *
 
 
-# Класс Вода - внешние стены, персонаж не может по ним и через них двигаться
+# Класс Стена - внутренняя граница, персонаж не может по ним и через них двигаться
 class Wall(pygame.sprite.Sprite):
 
     def __init__(self, game, x, y):

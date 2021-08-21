@@ -2,10 +2,9 @@ import pygame
 from settings import *
 
 
-# Класс Вода - внешние стены, персонаж не может по ним и через них двигаться
+# Класс Вода - внешняя граница, персонаж не может по ним и через них двигаться
 class Aqua(pygame.sprite.Sprite):
     def __init__(self, game, x, y):
-        # пока что логика как у box, поэтому в группе box
         self.groups = game.all_sprites, game.aqua
         pygame.sprite.Sprite.__init__(self, self.groups)
         self.game = game

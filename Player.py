@@ -42,7 +42,7 @@ class Player(pygame.sprite.Sprite):
             self.x += dx
             self.y += dy
 
-# Метод - столкновение с водой
+# Метод - флаг-столкновение с водой
     def collide_with_aqua(self, dx=0, dy=0):
         for aqua in self.game.aqua:
             if aqua.x == self.x + dx and aqua.y == self.y + dy:
@@ -50,7 +50,7 @@ class Player(pygame.sprite.Sprite):
                 return True
         return False
 
-# Метод - столкновение со стенами
+# Метод - флаг-столкновение со стенами
     def collide_with_walls(self, dx=0, dy=0):
         for wall in self.game.wall:
             if wall.x == self.x + dx and wall.y == self.y + dy:
@@ -58,15 +58,15 @@ class Player(pygame.sprite.Sprite):
                 return True
         return False
 
-# Метод - столкновение с коробками
+# Метод - флаг-столкновение с коробками
     def collide_with_boxes(self, dx=0, dy=0):
-        for player in self.game.box:
-            if player.x == self.x + dx and box.y == self.y + dy:
+        for box in self.game.box:
+            if box.x == self.x + dx and box.y == self.y + dy:
                 print('box')
                 return True
         return False
 
-# Метод - столкновение с порталом
+# Метод - флаг-столкновение с порталом
     def collide_with_portal(self, dx=0, dy=0):
         for portal in self.game.portal:
             if portal.x == self.x + dx and portal.y == self.y + dy:
@@ -74,7 +74,7 @@ class Player(pygame.sprite.Sprite):
                 return True
         return False
 
-# Метод - столкновение с пометкой
+# Метод - флаг-столкновение с меткой
     def collide_with_mark(self, dx=0, dy=0):
         for mark in self.game.mark:
             if mark.x == self.x + dx and mark.y == self.y + dy:
