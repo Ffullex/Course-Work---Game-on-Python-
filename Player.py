@@ -37,8 +37,7 @@ class Player(pygame.sprite.Sprite):
             self.x += dx
             self.y += dy
         elif self.collide_with_portal(dx, dy):
-            self.x += dx
-            self.y += dy
+            pygame.quit()
         else:
             self.x += dx
             self.y += dy
@@ -61,8 +60,8 @@ class Player(pygame.sprite.Sprite):
 
 # Метод - столкновение с коробками
     def collide_with_boxes(self, dx=0, dy=0):
-        for box in self.game.box:
-            if box.x == self.x + dx and box.y == self.y + dy:
+        for player in self.game.box:
+            if player.x == self.x + dx and box.y == self.y + dy:
                 print('box')
                 return True
         return False
