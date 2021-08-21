@@ -16,3 +16,7 @@ class Box(pygame.sprite.Sprite):
         self.y = y
         self.rect.x = x * TEXTURES_SIZE
         self.rect.y = y * TEXTURES_SIZE
+
+    def move_box(self, dx, dy):
+        self.x += dx
+        self.y += dy

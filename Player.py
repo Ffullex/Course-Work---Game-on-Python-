@@ -3,7 +3,7 @@ from os import path
 import pygame
 import pygame.sprite
 
-import Box
+from Box import *
 from Camera import Map
 from settings import *
 
@@ -33,8 +33,7 @@ class Player(pygame.sprite.Sprite):
             self.x += dx
             self.y += dy
         elif self.collide_with_boxes(dx, dy):
-            # Box.x += dx
-            # Box.y += dy
+            Box.move_box(dx, dy)
             self.x += dx
             self.y += dy
         elif self.collide_with_portal(dx, dy):
