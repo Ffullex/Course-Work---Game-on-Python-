@@ -16,11 +16,15 @@ from Wall import Wall
 class Game:
     def __init__(self):
         pygame.init()
+        pygame.mixer.pre_init(44100, 16, 2, 4096)
         self.screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
         pygame.display.set_caption(TITLE)
         self.clock = pygame.time.Clock()
         pygame.key.set_repeat(500, 100)
         self.set_data()
+        pygame.mixer.init()
+        pygame.mixer.music.load('./music/BloodMoonWaltz.mp3')
+        pygame.mixer.music.play(-1)
 
 # Метод - получение карты
     def set_data(self):
