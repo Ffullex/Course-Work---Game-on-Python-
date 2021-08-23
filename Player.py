@@ -91,8 +91,8 @@ class Player(pygame.sprite.Sprite):
                     if item.x == box.x + dx and item.y == box.y + dy:
                         self.x -= dx
                         self.y -= dy
-                        box.x = item.x - dx - dx
-                        box.y = item.y - dy - dy
+                        box.x = item.x - dx
+                        box.y = item.y - dy
                         return 4
                 return True
         return False
