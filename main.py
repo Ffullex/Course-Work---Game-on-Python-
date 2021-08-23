@@ -1,3 +1,5 @@
+import sys
+from idlelib import window
 from os import path
 import pygame.sprite
 
@@ -12,15 +14,21 @@ from Portal import *
 # Класс непосредственно игрового процесса
 from Wall import Wall
 
+# Меню
+# item_list = [
+#     (120, 140, u'Play', (250, 250, 30), (250, 30, 250), 0),
+#     (120, 140, u'Exit', (250, 250, 30), (250, 30, 250), 1),
+# ]
+
 
 class Game:
     def __init__(self):
-        pygame.init()
         pygame.mixer.pre_init(44100, 16, 2, 4096)
+        pygame.init()
         self.screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
         pygame.display.set_caption(TITLE)
-        self.clock = pygame.time.Clock()
         pygame.key.set_repeat(500, 100)
+        self.clock = pygame.time.Clock()
         self.set_data()
         pygame.mixer.init()
         pygame.mixer.music.load('./music/BloodMoonWaltz.mp3')
@@ -34,24 +42,25 @@ class Game:
 # Метод - рисования карты
     def new(self):
         self.all_sprites = pygame.sprite.Group()
+        self.player = pygame.sprite.Group()
         self.box = pygame.sprite.Group()
         self.portal = pygame.sprite.Group()
         self.wall = pygame.sprite.Group()
         self.mark = pygame.sprite.Group()
         self.aqua = pygame.sprite.Group()
-        for row, boxes in enumerate(self.map.data):
-            for col, box in enumerate(boxes):
-                if box == '1':
+        for row, cells in enumerate(self.map.data):
+            for col, cell in enumerate(cells):
+                if cell == '1':
                     Box(self, col, row)
-                if box == '2':
+                if cell == '2':
                     Aqua(self, col, row)
-                if box == '$':
+                if cell == '$':
                     self.player = Player(self, col, row)
-                if box == '3':
+                if cell == '3':
                     Portal(self, col, row)
-                if box == '4':
+                if cell == '4':
                     Wall(self, col, row)
-                if box == '5':
+                if cell == '5':
                     Mark(self, col, row)
 
         self.camera = Camera(self.map.width, self.map.height)
@@ -63,9 +72,6 @@ class Game:
             self.events()
             self.update()
             self.draw()
-            if not Player.collide_with_portal:
-                print("no no no")
-                g.quit()
 
 # Метод - выход из игры
     def quit(self):
@@ -109,8 +115,47 @@ class Game:
                 if event.key == pygame.K_DOWN:
                     self.player.move(dy=1)
 
+#
+# class Menu:
+#     def __init__(self, items=[120, 140, u'item', (250, 250, 30), (250, 30, 250), 0]):
+#         self.items = items
+#
+#     def menu(self):
+#         done = True
+#         item = 0
+#         while done:
+#             screen.fill((0, 100, 200))
+#
+#             cursor = pygame.mouse.get_pos()
+#             for i in self.items:
+#                 if i[0] < cursor[0] < i[0]+55 and cursor[1]>i[1] and cursor[1]<i[1]+55:
+#                     item=i[5]
+#                 self.render(screen, item)
+#
+#             for e in pygame.event.get():
+#                 if e.type == pygame.QUIT:
+#                     sys.exit()
+#                 if e.type == pygame.KEYDOWN:
+#                     if e.key == pygame.K_ESCAPE:
+#                         sys.exit()
+#                     if e.key == pygame.K_UP:
+#                         if item > 0:
+#                             item -= 1
+#                     if e.key == pygame.K_DOWN:
+#                         if item < 0:
+#                             item += 1
+#                 if e.type == pygame.MOUSEBUTTONDOWN:
+#                     if item == 0:
+#                         done = False
+#                     elif item == 1:
+#                         sys.exit()
+#             window.blit(screen, (0, 0))
+#             pygame.display.flip()
+#
 
 # Запуск игрового процесса
+# game = Menu(item_list)
+# game.Menu
 g = Game()
 while True:
     g.new()

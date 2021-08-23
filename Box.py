@@ -18,17 +18,17 @@ class Box(pygame.sprite.Sprite):
         self.rect.y = y * TEXTURES_SIZE
 
     def move_box(self, dx, dy):
-        if self.collide_with_walls(dx, dy):
-            self.x = self.x
-            self.y = self.y
-        elif self.collide_with_player(dx, dy):
-            self.x += dx
-            self.y += dy
-        elif self.collide_with_mark(dx, dy):
-            print('mark')
-        else:
-            self.x += dx
-            self.y += dy
+        self.x += dx
+        self.y += dy
+        # if self.collide_with_walls(dx, dy):
+        #     self.x = self.x
+        #     self.y = self.y
+        # elif self.collide_with_player(dx, dy):
+        #     self.x -= dx
+        #     self.y -= dy
+        # elif self.collide_with_mark(dx, dy):
+        #     print('mark')
+        # else:
 
 # Метод - флаг-столкновение с водой
     def collide_with_player(self, dx=0, dy=0):
@@ -61,3 +61,7 @@ class Box(pygame.sprite.Sprite):
                 print('mark')
                 return True
         return False
+
+    def update(self):
+        self.rect.x = self.x * TEXTURES_SIZE
+        self.rect.y = self.y * TEXTURES_SIZE

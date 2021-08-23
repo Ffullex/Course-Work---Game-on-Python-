@@ -17,3 +17,7 @@ class Mark(pygame.sprite.Sprite):
         self.y = y
         self.rect.x = x * TEXTURES_SIZE
         self.rect.y = y * TEXTURES_SIZE
+
+    def update(self):
+        self.rect.x = self.x * TEXTURES_SIZE
+        self.rect.y = self.y * TEXTURES_SIZE

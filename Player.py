@@ -20,6 +20,8 @@ class Player(pygame.sprite.Sprite):
         self.rect = self.image.get_rect()
         self.x = x
         self.y = y
+        # elif self.collide_with_mark(dx, dy):
+        #     self.x += dx
 
 # Метод - передвижение
     def move(self, dx=0, dy=0):
@@ -29,11 +31,8 @@ class Player(pygame.sprite.Sprite):
         elif self.collide_with_aqua(dx, dy):
             self.x = self.x
             self.y = self.y
-        elif self.collide_with_mark(dx, dy):
-            self.x += dx
-            self.y += dy
+        #     self.y += dy
         elif self.collide_with_boxes(dx, dy):
-            Box.move_box(dx, dy)
             self.x += dx
             self.y += dy
         elif self.collide_with_portal(dx, dy):
@@ -63,6 +62,12 @@ class Player(pygame.sprite.Sprite):
         for box in self.game.box:
             if box.x == self.x + dx and box.y == self.y + dy:
                 print('box')
+                box.x += dx
+                box.y += dy
+                for item in self.game.mark:
+                    if item.x == box.x and item.y == box.y:
+                        item.kill()
+                        box.kill()
                 return True
         return False
 
