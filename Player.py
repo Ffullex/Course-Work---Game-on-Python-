@@ -32,9 +32,15 @@ class Player(pygame.sprite.Sprite):
             self.x = self.x
             self.y = self.y
         #     self.y += dy
-        elif self.collide_with_boxes(dx, dy):
+        elif self.collide_with_boxes(dx, dy) == 1:
             self.x += dx
             self.y += dy
+        elif self.collide_with_boxes(dx, dy) == 2:
+            pass
+        elif self.collide_with_boxes(dx, dy) == 3:
+            pass
+        elif self.collide_with_boxes(dx, dy) == 4:
+            pass
         elif self.collide_with_portal(dx, dy):
             pygame.quit()
         else:
@@ -68,6 +74,26 @@ class Player(pygame.sprite.Sprite):
                     if item.x == box.x and item.y == box.y:
                         item.kill()
                         box.kill()
+                        return 1
+                for item in self.game.aqua:
+                    if item.x == box.x and item.y == box.y:
+                        box.x = self.x
+                        box.y = self.y
+                        return 2
+                for item in self.game.wall:
+                    if item.x == box.x and item.y == box.y:
+                        self.x -= dx
+                        self.y -= dy
+                        box.x = item.x - dx
+                        box.y = item.y - dy
+                        return 3
+                for item in self.game.box:
+                    if item.x == box.x + dx and item.y == box.y + dy:
+                        self.x -= dx
+                        self.y -= dy
+                        box.x = item.x - dx - dx
+                        box.y = item.y - dy - dy
+                        return 4
                 return True
         return False
 
