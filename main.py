@@ -16,7 +16,7 @@ from Wall import Wall
 
 # Меню
 # item_list = [
-#     (120, 140, u'Play', (250, 250, 30), (250, 30, 250), 0),
+#     (120, 140, 'Play', (250, 250, 30), (250, 30, 250), 0),
 #     (120, 140, u'Exit', (250, 250, 30), (250, 30, 250), 1),
 # ]
 
@@ -117,7 +117,7 @@ class Game:
 
 #
 # class Menu:
-#     def __init__(self, items=[120, 140, u'item', (250, 250, 30), (250, 30, 250), 0]):
+#     def __init__(self, items=[120, 140, 'item', (250, 250, 30), (250, 30, 250), 0]):
 #         self.items = items
 #
 #     def menu(self):
@@ -152,6 +152,7 @@ class Game:
 #             window.blit(screen, (0, 0))
 #             pygame.display.flip()
 #
+
 
 # Запуск игрового процесса
 # game = Menu(item_list)

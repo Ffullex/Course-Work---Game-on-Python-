@@ -20,3 +20,6 @@ class Box(pygame.sprite.Sprite):
     def update(self):
         self.rect.x = self.x * TEXTURES_SIZE
         self.rect.y = self.y * TEXTURES_SIZE
+
+    def has_collide_box(self, other_x, other_y):
+        return self.x == other_x and self.y == other_y

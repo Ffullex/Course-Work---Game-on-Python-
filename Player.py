@@ -20,8 +20,6 @@ class Player(pygame.sprite.Sprite):
         self.rect = self.image.get_rect()
         self.x = x
         self.y = y
-        # elif self.collide_with_mark(dx, dy):
-        #     self.x += dx
 
 # Метод - передвижение
     def move(self, dx=0, dy=0):
@@ -31,21 +29,13 @@ class Player(pygame.sprite.Sprite):
         elif self.collide_with_aqua(dx, dy):
             self.x = self.x
             self.y = self.y
-        #     self.y += dy
-        elif self.collide_with_boxes(dx, dy) == 1:
-            self.x += dx
-            self.y += dy
-        elif self.collide_with_boxes(dx, dy) == 2:
-            pass
-        elif self.collide_with_boxes(dx, dy) == 3:
-            pass
-        elif self.collide_with_boxes(dx, dy) == 4:
-            pass
-        elif self.collide_with_portal(dx, dy):
-            pygame.quit()
         else:
-            self.x += dx
-            self.y += dy
+            should_move = self.collide_with_boxes(dx, dy)
+            if should_move:
+                self.x += dx
+                self.y += dy
+            if self.collide_with_portal(dx, dy):
+                pygame.quit()
 
 # Метод - флаг-столкновение с водой
     def collide_with_aqua(self, dx=0, dy=0):
@@ -65,37 +55,30 @@ class Player(pygame.sprite.Sprite):
 
 # Метод - флаг-столкновение с коробками
     def collide_with_boxes(self, dx=0, dy=0):
-        for box in self.game.box:
-            if box.x == self.x + dx and box.y == self.y + dy:
+        for box_2 in self.game.box:
+            if box_2.x == self.x + dx and box_2.y == self.y + dy:
                 print('box')
-                box.x += dx
-                box.y += dy
-                for item in self.game.mark:
-                    if item.x == box.x and item.y == box.y:
-                        item.kill()
-                        box.kill()
-                        return 1
+                new_box_x = box_2.x + dx
+                new_box_y = box_2.y + dy
+                for item_box in self.game.box:
+                    if item_box.has_collide_box(new_box_x, new_box_y):
+                        return False
+                for item_wall in self.game.wall:
+                    if item_wall.x == new_box_x and item_wall.y == new_box_y:
+                        return False
                 for item in self.game.aqua:
-                    if item.x == box.x and item.y == box.y:
-                        box.x = self.x
-                        box.y = self.y
-                        return 2
-                for item in self.game.wall:
-                    if item.x == box.x and item.y == box.y:
-                        self.x -= dx
-                        self.y -= dy
-                        box.x = item.x - dx
-                        box.y = item.y - dy
-                        return 3
-                for item in self.game.box:
-                    if item.x == box.x + dx and item.y == box.y + dy:
-                        self.x -= dx
-                        self.y -= dy
-                        box.x = item.x - dx - dx
-                        box.y = item.y - dy - dy
-                        return 4
-                return True
-        return False
+                    if item.x == new_box_x and item.y == new_box_y:
+                        box_2.x = self.x
+                        box_2.y = self.y
+                        return True
+                for item in self.game.mark:
+                    if item.x == new_box_x and item.y == new_box_y:
+                        item.kill()
+                        box_2.kill()
+                        return True
+                box_2.x = new_box_x
+                box_2.y = new_box_y
+        return True
 
 # Метод - флаг-столкновение с порталом
     def collide_with_portal(self, dx=0, dy=0):
