@@ -26,6 +26,9 @@ class Player(pygame.sprite.Sprite):
         if self.collide_with_walls(dx, dy):
             self.x = self.x
             self.y = self.y
+        elif self.collide_with_mark(dx, dy):
+            self.x = self.x
+            self.y = self.y
         elif self.collide_with_aqua(dx, dy):
             self.x = self.x
             self.y = self.y
@@ -66,14 +69,14 @@ class Player(pygame.sprite.Sprite):
                 for item_wall in self.game.wall:
                     if item_wall.x == new_box_x and item_wall.y == new_box_y:
                         return False
-                for item in self.game.aqua:
-                    if item.x == new_box_x and item.y == new_box_y:
+                for item_aqua in self.game.aqua:
+                    if item_aqua.x == new_box_x and item_aqua.y == new_box_y:
                         box_2.x = self.x
                         box_2.y = self.y
                         return True
-                for item in self.game.mark:
-                    if item.x == new_box_x and item.y == new_box_y:
-                        item.kill()
+                for item_mark in self.game.mark:
+                    if item_mark.x == new_box_x and item_mark.y == new_box_y:
+                        item_mark.kill()
                         box_2.kill()
                         return True
                 box_2.x = new_box_x
