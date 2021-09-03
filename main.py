@@ -2,6 +2,7 @@ import sys
 from idlelib import window
 from os import path
 import pygame.sprite
+import pygame_menu
 
 from Aqua import *
 from Mark import Mark
@@ -9,22 +10,16 @@ from Player import *
 from Box import *
 from Camera import *
 from Portal import *
-
-
 # Класс непосредственно игрового процесса
 from Wall import Wall
 
-# Меню
-# item_list = [
-#     (120, 140, 'Play', (250, 250, 30), (250, 30, 250), 0),
-#     (120, 140, u'Exit', (250, 250, 30), (250, 30, 250), 1),
-# ]
+pygame.init()
 
 
 class Game:
     def __init__(self):
         pygame.mixer.pre_init(44100, 16, 2, 4096)
-        pygame.init()
+
         self.screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
         pygame.display.set_caption(TITLE)
         pygame.key.set_repeat(500, 100)
@@ -115,49 +110,19 @@ class Game:
                 if event.key == pygame.K_DOWN:
                     self.player.move(dy=1)
 
-#
-# class Menu:
-#     def __init__(self, items=[120, 140, 'item', (250, 250, 30), (250, 30, 250), 0]):
-#         self.items = items
-#
-#     def menu(self):
-#         done = True
-#         item = 0
-#         while done:
-#             screen.fill((0, 100, 200))
-#
-#             cursor = pygame.mouse.get_pos()
-#             for i in self.items:
-#                 if i[0] < cursor[0] < i[0]+55 and cursor[1]>i[1] and cursor[1]<i[1]+55:
-#                     item=i[5]
-#                 self.render(screen, item)
-#
-#             for e in pygame.event.get():
-#                 if e.type == pygame.QUIT:
-#                     sys.exit()
-#                 if e.type == pygame.KEYDOWN:
-#                     if e.key == pygame.K_ESCAPE:
-#                         sys.exit()
-#                     if e.key == pygame.K_UP:
-#                         if item > 0:
-#                             item -= 1
-#                     if e.key == pygame.K_DOWN:
-#                         if item < 0:
-#                             item += 1
-#                 if e.type == pygame.MOUSEBUTTONDOWN:
-#                     if item == 0:
-#                         done = False
-#                     elif item == 1:
-#                         sys.exit()
-#             window.blit(screen, (0, 0))
-#             pygame.display.flip()
-#
+
+def start_the_game():
+    g = Game()
+    while True:
+        g.new()
+        g.run()
 
 
-# Запуск игрового процесса
-# game = Menu(item_list)
-# game.Menu
-g = Game()
-while True:
-    g.new()
-    g.run()
+surface = pygame.display.set_mode((600, 400))
+menu = pygame_menu.Menu('Welcome', 400, 300,
+                       theme=pygame_menu.themes.THEME_BLUE)
+
+menu.add.text_input('Name :', default='John Doe')
+menu.add.button('Play', start_the_game)
+menu.add.button('Quit', pygame_menu.events.EXIT)
+menu.mainloop(surface)
