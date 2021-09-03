@@ -39,6 +39,7 @@ class Player(pygame.sprite.Sprite):
                 self.y += dy
             if self.collide_with_portal(dx, dy):
                 pygame.quit()
+                sys.exit()
 
 # Метод - флаг-столкновение с водой
     def collide_with_aqua(self, dx=0, dy=0):
